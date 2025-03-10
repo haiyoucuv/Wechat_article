@@ -1,9 +1,13 @@
 点击上方**码不了一点**+关注和**★ 星标**
 
-![](https://files.mdnice.com/user/56657/rope-sim-preview.jpg)
+![title.jpeg](images/title.jpeg)
+
 
 ## 引言
 在《只狼》《塞尔达传说》等大作中，你是否见过绳桥摇曳的逼真效果？这种物理表现的核心就是绳索模拟技术。本文将揭秘通过Verlet积分实现实时绳索模拟的方案，并配合Cocos Creator进行实战演示。
+
+## 本文以以往文章代码库
+> https://github.com/haiyoucuv/Wechat_article
 
 ## 涉及知识
 - TypeScript
@@ -301,6 +305,10 @@ export class Rope extends Component {
 - 游戏物理：绳索、藤蔓、锁链等
 - 布料模拟：旗帜、衣物等
 - 特效制作：丝带、流苏等
+
+## 相关代码在哪里
+
+> https://github.com/haiyoucuv/Wechat_article
 
 ## 结语
 Verlet积分因其简单高效的特点，在游戏物理模拟中广受欢迎。本文介绍的绳索模拟方案，可以轻松实现逼真的物理效果，希望对你的游戏开发有所帮助。
