@@ -1,0 +1,10 @@
+{
+  "name": "temp",
+  "uuid": "8a0fb1a1-a675-4963-af54-33880a922f1e",
+  "creator": {
+    "version": "3.8.6"
+  },
+  "dependencies": {
+    "@cocos/creator-types": "*"
+  }
+}
