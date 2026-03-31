@@ -5,6 +5,7 @@
     "version": "3.8.8"
   },
   "dependencies": {
-    "@cocos/creator-types": "*"
+    "@cocos/creator-types": "*",
+    "sharp": "^0.34.5"
   }
 }
