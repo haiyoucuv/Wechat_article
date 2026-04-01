@@ -10,7 +10,7 @@ export class FlockManager extends Component {
     @property sepWeight: number = 1.5;
     @property aliWeight: number = 1.0;
     @property cohWeight: number = 1.0;
-    @property perception: number = 50; 
+    @property perception: number = 50;
 
     private boidsData: Boid[] = [];
     private boidNodes: Node[] = [];
@@ -41,11 +41,11 @@ export class FlockManager extends Component {
 
             const boid = new Boid();
             boid.position.set(
-                (Math.random() - 0.5) * this.screenWidth, 
+                (Math.random() - 0.5) * this.screenWidth,
                 (Math.random() - 0.5) * this.screenHeight
             );
             this.boidsData.push(boid);
-            
+
             // 同步初始坐标
             node.setPosition(boid.position.x, boid.position.y);
             const angle = Math.atan2(boid.velocity.y, boid.velocity.x);
@@ -53,7 +53,7 @@ export class FlockManager extends Component {
 
             this.node.addChild(node);
             this.boidNodes.push(node);
-            
+
             // 清理首帧拖尾
             const streak = node.getComponent(MotionStreak) || node.getComponentInChildren(MotionStreak);
             if (streak) {
@@ -78,7 +78,7 @@ export class FlockManager extends Component {
 
     onMouseDown(e: EventMouse) {
         this.mouseActive = true;
-        this.mouseAttract = e.getButton() === 2; 
+        this.mouseAttract = e.getButton() === 2;
         this.updateMousePos(e);
     }
 
@@ -124,16 +124,16 @@ export class FlockManager extends Component {
         for (let i = 0; i < this.boidsData.length; i++) {
             const boid = this.boidsData[i];
             boid.update(dt);
-            
-            const didWrap = this.wrapAround(boid); 
+
+            const didWrap = this.wrapAround(boid);
 
             const node = this.boidNodes[i];
             node.setPosition(boid.position.x, boid.position.y);
-            
+
             // 更新节点角度
             const angle = Math.atan2(boid.velocity.y, boid.velocity.x);
             node.setRotationFromEuler(new Vec3(0, 0, angle * 180 / Math.PI - 90));
-            
+
             // 越界保护
             if (didWrap) {
                 const streak = node.getComponent(MotionStreak) || node.getComponentInChildren(MotionStreak);
@@ -150,17 +150,17 @@ export class FlockManager extends Component {
 
     private wrapAround(boid: Boid): boolean {
         // 增加 50 像素的缓冲区，让鸟完全飞出屏幕视野后再传送
-        const margin = 50; 
+        const margin = 50;
         const halfW = this.screenWidth / 2 + margin;
         const halfH = this.screenHeight / 2 + margin;
         let wrapped = false;
-        
+
         if (boid.position.x > halfW) { boid.position.x = -halfW; wrapped = true; }
         else if (boid.position.x < -halfW) { boid.position.x = halfW; wrapped = true; }
 
         if (boid.position.y > halfH) { boid.position.y = -halfH; wrapped = true; }
         else if (boid.position.y < -halfH) { boid.position.y = halfH; wrapped = true; }
-        
+
         return wrapped;
     }
 }

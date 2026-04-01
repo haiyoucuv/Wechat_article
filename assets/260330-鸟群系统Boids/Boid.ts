@@ -5,8 +5,8 @@ export class Boid {
     velocity: Vec2 = v2((Math.random() - 0.5) * 240, (Math.random() - 0.5) * 240);
     acceleration: Vec2 = v2(0, 0);
 
-    maxSpeed: number = 240; 
-    maxForce: number = 9;   
+    maxSpeed: number = 240;
+    maxForce: number = 9;
 
     private limitVector(vec: Vec2, max: number) {
         if (vec.lengthSqr() > max * max) {
@@ -17,10 +17,10 @@ export class Boid {
     separation(boids: Boid[], perception: number): Vec2 {
         const steering = v2(0, 0);
         let total = 0;
-        
+
         for (const other of boids) {
             if (other === this) continue;
-            
+
             const dist = Vec2.distance(this.position, other.position);
             // 规则1：如果距离小于 perception * 0.5，产生排斥力
             if (dist > 0 && dist < perception * 0.5) {
@@ -30,7 +30,7 @@ export class Boid {
                 total++;
             }
         }
-        
+
         if (total > 0) {
             steering.multiplyScalar(1 / total);
             steering.normalize().multiplyScalar(this.maxSpeed);
@@ -43,7 +43,7 @@ export class Boid {
     alignment(boids: Boid[], perception: number): Vec2 {
         const steering = v2(0, 0);
         let total = 0;
-        
+
         for (const other of boids) {
             if (other === this) continue;
 
@@ -54,7 +54,7 @@ export class Boid {
                 total++;
             }
         }
-        
+
         if (total > 0) {
             steering.multiplyScalar(1 / total);
             steering.normalize().multiplyScalar(this.maxSpeed);
@@ -67,7 +67,7 @@ export class Boid {
     cohesion(boids: Boid[], perception: number): Vec2 {
         const steering = v2(0, 0);
         let total = 0;
-        
+
         for (const other of boids) {
             if (other === this) continue;
 
@@ -78,7 +78,7 @@ export class Boid {
                 total++;
             }
         }
-        
+
         if (total > 0) {
             steering.multiplyScalar(1 / total);
             return this.seek(steering);
@@ -122,10 +122,10 @@ export class Boid {
         acc.multiplyScalar(dt * 60);
         this.velocity.add(acc);
         this.limitVector(this.velocity, this.maxSpeed);
-        
+
         const vel = this.velocity.clone().multiplyScalar(dt);
         this.position.add(vel);
-        
+
         this.acceleration.set(0, 0);
     }
 }
